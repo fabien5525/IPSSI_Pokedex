@@ -1,3 +1,4 @@
-import Nav from 'components/atoms/Nav/Nav';
+import Nav from 'components/atoms/Nav';
+import Loader from 'components/atoms/Loader';
 
-export { Nav };
+export { Nav, Loader };

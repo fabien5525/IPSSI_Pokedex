@@ -1,16 +1,24 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Nav } from "components/atoms";
-import "components/atoms/Nav/Nav.scss";
+import { Loader, Nav } from "components/atoms";
 import { AppProvider } from "contexts/AppContext";
+import { ThemeProvider } from "styled-components";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const theme = {
+    colors: {
+      primary: "#0d1117",
+    },
+  };
+
   return (
     <>
-      <AppProvider>
-        <Nav />
-        <Component {...pageProps}> </Component>
-      </AppProvider>
+      <ThemeProvider theme={theme}>
+        <AppProvider>
+          <Nav />
+          <Component {...pageProps}> </Component>
+        </AppProvider>
+      </ThemeProvider>
     </>
   );
 }
