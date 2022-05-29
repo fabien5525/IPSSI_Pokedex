@@ -1,3 +1,4 @@
 import FetchList from "./FetchList";
+import FetchPokemon from "./FetchPokemon";
 
-export { FetchList };
+export { FetchList, FetchPokemon };

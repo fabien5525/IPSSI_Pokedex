@@ -1,6 +1,8 @@
 import axios from "axios";
 import { QueryClient, useQuery, QueryClientProvider } from "react-query";
 import { Loader } from "components/atoms";
+import { PokemonItem } from "components/atoms";
+import styled from "styled-components";
 
 const List = () => {
   const {
@@ -24,16 +26,15 @@ const List = () => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+  console.log(data.data.results);
 
-  return <>{JSON.stringify(data.data.results)}</>;
-  /* 
   return (
-    <ul>
-      {data.results.map((pokemon: string | undefined, index: Number) => (
-        <li key={`pokelist_${index}`}>{pokemon}</li>
+    <ul className="carousel">
+      {data.data.results.map((pokemon: any | undefined, index: Number) => (
+        <PokemonItem key={`pokelist_${index}`} {...pokemon} />
       ))}
     </ul>
-  ); */
+  );
 };
 
 const FetchList = () => {

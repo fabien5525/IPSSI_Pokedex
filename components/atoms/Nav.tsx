@@ -3,9 +3,15 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const CustomNav = styled.nav`
-  nav {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  & {
+    height: 6vh;
     background-color: #282c34;
-    height: 5vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -14,7 +20,6 @@ const CustomNav = styled.nav`
     color: white;
     border-bottom: "solid 1px";
     padding-bottom: "1rem";
-    height: "100px";
 
     a {
       margin-left: 5vh;
