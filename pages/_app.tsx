@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Nav } from "components/atoms";
+import { Nav } from "components";
 import { AppProvider } from "contexts/AppContext";
 import { ThemeProvider } from "styled-components";
 

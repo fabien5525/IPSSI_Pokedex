@@ -1,10 +1,11 @@
 import axios from "axios";
 import { QueryClient, useQuery, QueryClientProvider } from "react-query";
-import { Loader } from "components/atoms";
-import { PokemonItem } from "components/atoms";
-import styled from "styled-components";
+import { Loader, PokemonItem } from "components";
+import { useApp } from "contexts/AppContext";
 
-const List = () => {
+const Fetch = () => {
+  const { setPokemons } = useApp();
+
   const {
     isLoading,
     isError,
@@ -26,24 +27,50 @@ const List = () => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
-  console.log(data.data.results);
+
+  setPokemons(data.data.results);
+
+  return <></>;
+};
+
+const List = () => {
+  const { pokemonFilter, setPokemonFilter, pokemons } = useApp();
+
+  const dataFiltered = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(pokemonFilter.toLowerCase())
+  );
+
+  const handleChange = (e: any) => {
+    setPokemonFilter(e.target.value);
+  };
 
   return (
-    <ul className="carousel">
-      {data.data.results.map((pokemon: any | undefined, index: Number) => (
-        <PokemonItem key={`pokelist_${index}`} {...pokemon} />
-      ))}
-    </ul>
+    <>
+      <input type="text" onChange={handleChange} value={pokemonFilter} />
+      <ul>
+        {dataFiltered.map((pokemon: any | undefined, index: Number) => (
+          <PokemonItem key={`pokelist_${index}`} index={index} {...pokemon} />
+        ))}
+      </ul>
+    </>
   );
 };
 
 const FetchList = () => {
-  const queryClient = new QueryClient();
-  return (
-    <QueryClientProvider client={queryClient}>
-      <List />
-    </QueryClientProvider>
-  );
+  const { pokemons } = useApp();
+
+  console.warn(pokemons);
+
+  if (pokemons.length === 0) {
+    const queryClient = new QueryClient();
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Fetch />
+      </QueryClientProvider>
+    );
+  } else {
+    return <List />;
+  }
 };
 
 export default FetchList;
