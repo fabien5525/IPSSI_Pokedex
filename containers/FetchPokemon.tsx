@@ -14,7 +14,7 @@ const Pokemon = ({ pokemon }: props) => {
   const { pokemonsFavorite, setPokemonsFavorite } = useApp();
 
   useEffect(() => {
-    console.warn("UPDATE", pokemonsFavorite)
+    //console.warn("UPDATE", pokemonsFavorite)
     localStorage.setItem("pokemonsFavorite", JSON.stringify(pokemonsFavorite));
   }, [pokemonsFavorite]);
 

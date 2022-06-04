@@ -2,9 +2,11 @@ import axios from "axios";
 import { QueryClient, useQuery, QueryClientProvider } from "react-query";
 import { Loader, PokemonItem } from "components";
 import { useApp } from "contexts/AppContext";
+import { useRouter } from "next/router";
 
-const FetchListOfPokemons = () => {
-  const { setPokemons } = useApp();
+const Fetch = () => {
+  const { setPokemons, setPokemonFilter } = useApp();
+  const { query } = useRouter();
 
   const {
     isLoading,
@@ -65,7 +67,7 @@ const FetchList = () => {
     const queryClient = new QueryClient();
     return (
       <QueryClientProvider client={queryClient}>
-        <FetchListOfPokemons />
+        <Fetch />
       </QueryClientProvider>
     );
   } else {
