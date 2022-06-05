@@ -48,8 +48,8 @@ const List = () => {
     <>
       <input type="text" onChange={handleChange} value={pokemonFilter} />
       <ul>
-        {dataFiltered.map((pokemon: any | undefined, index: Number) => (
-          <PokemonItem key={`pokelist_${index}`} index={index} {...pokemon} />
+        {dataFiltered.map((pokemon: any | undefined, index: number) => (
+          <PokemonItem key={`pokelist_${index}`} id={index + 1} {...pokemon} />
         ))}
       </ul>
     </>

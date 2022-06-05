@@ -17,7 +17,7 @@ const StyledForm = styled(Form)`
   width: 100%;
   height: 100%;
   padding: 65px 0;
-  background: linear-gradient(rgba(255, 202, 0, 0.4), #ffca00 60%);
+  background: linear-gradient(rgba(255, 202, 0, 0.4), #b7f707d6 60%);
 `;
 
 const StyledRow = styled.div`

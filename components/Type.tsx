@@ -1,3 +1,4 @@
+import { FirstLetterUpperCase } from "contexts/AppContext";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
@@ -14,6 +15,10 @@ const base = `
     -icab-border-radius: 20px;
     -o-border-radius: 20px;
     color: white;
+    width: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
 `;
 
 const Normal = styled.span`
@@ -124,26 +129,26 @@ const Undifined = styled.span`
   border: 1px solid #44685e;
 `;
 
-const Type = ({ name, children }: props) => {
-  if (name.toLowerCase() === "normal") return <Normal>{children}</Normal>;
-  if (name.toLowerCase() === "fighting") return <Fighting>{children}</Fighting>;
-  if (name.toLowerCase() === "flying") return <Flying>{children}</Flying>;
-  if (name.toLowerCase() === "poison") return <Poison>{children}</Poison>;
-  if (name.toLowerCase() === "ground") return <Ground>{children}</Ground>;
-  if (name.toLowerCase() === "rock") return <Rock>{children}</Rock>;
-  if (name.toLowerCase() === "bug") return <Bug>{children}</Bug>;
-  if (name.toLowerCase() === "ghost") return <Ghost>{children}</Ghost>;
-  if (name.toLowerCase() === "steel") return <Steel>{children}</Steel>;
-  if (name.toLowerCase() === "fire") return <Fire>{children}</Fire>;
-  if (name.toLowerCase() === "water") return <Water>{children}</Water>;
-  if (name.toLowerCase() === "grass") return <Grass>{children}</Grass>;
-  if (name.toLowerCase() === "electric") return <Electric>{children}</Electric>;
-  if (name.toLowerCase() === "psychic") return <Psychic>{children}</Psychic>;
-  if (name.toLowerCase() === "ice") return <Ice>{children}</Ice>;
-  if (name.toLowerCase() === "dragon") return <Dragon>{children}</Dragon>;
-  if (name.toLowerCase() === "dark") return <Dark>{children}</Dark>;
+const Type = ({ name }: props) => {
+  if (name.toLowerCase() === "normal") return <Normal>{FirstLetterUpperCase(name)}</Normal>;
+  if (name.toLowerCase() === "fighting") return <Fighting>{FirstLetterUpperCase(name)}</Fighting>;
+  if (name.toLowerCase() === "flying") return <Flying>{FirstLetterUpperCase(name)}</Flying>;
+  if (name.toLowerCase() === "poison") return <Poison>{FirstLetterUpperCase(name)}</Poison>;
+  if (name.toLowerCase() === "ground") return <Ground>{FirstLetterUpperCase(name)}</Ground>;
+  if (name.toLowerCase() === "rock") return <Rock>{FirstLetterUpperCase(name)}</Rock>;
+  if (name.toLowerCase() === "bug") return <Bug>{FirstLetterUpperCase(name)}</Bug>;
+  if (name.toLowerCase() === "ghost") return <Ghost>{FirstLetterUpperCase(name)}</Ghost>;
+  if (name.toLowerCase() === "steel") return <Steel>{FirstLetterUpperCase(name)}</Steel>;
+  if (name.toLowerCase() === "fire") return <Fire>{FirstLetterUpperCase(name)}</Fire>;
+  if (name.toLowerCase() === "water") return <Water>{FirstLetterUpperCase(name)}</Water>;
+  if (name.toLowerCase() === "grass") return <Grass>{FirstLetterUpperCase(name)}</Grass>;
+  if (name.toLowerCase() === "electric") return <Electric>{FirstLetterUpperCase(name)}</Electric>;
+  if (name.toLowerCase() === "psychic") return <Psychic>{FirstLetterUpperCase(name)}</Psychic>;
+  if (name.toLowerCase() === "ice") return <Ice>{FirstLetterUpperCase(name)}</Ice>;
+  if (name.toLowerCase() === "dragon") return <Dragon>{FirstLetterUpperCase(name)}</Dragon>;
+  if (name.toLowerCase() === "dark") return <Dark>{FirstLetterUpperCase(name)}</Dark>;
 
-  return <Undifined>{children}</Undifined>;
+  return <Undifined>???</Undifined>;
 };
 
 export default Type;

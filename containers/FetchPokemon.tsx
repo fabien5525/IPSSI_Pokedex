@@ -1,9 +1,9 @@
 import axios from "axios";
 import { QueryClient, useQuery, QueryClientProvider } from "react-query";
-import { Loader, Type } from "components";
+import { Loader, Type, StyledTypes } from "components";
 import Image from "next/image";
-import styled, { StyledFunction } from "styled-components";
-import { useApp } from "contexts/AppContext";
+import styled from "styled-components";
+import { useApp, FirstLetterUpperCase } from "contexts/AppContext";
 import { useEffect } from "react";
 
 interface props {
@@ -39,22 +39,6 @@ const Pokemon = ({ pokemon }: props) => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
-
-  const StyledTypes = styled.div`
-    span {
-      width: 64px;
-      height: 24px;
-      display: inline-block;
-      text-align: center;
-      margin-left: 4px;
-    }
-  `;
-
-  const FirstLetterUpperCase = (str: string) => {
-    if (str.length === 0) return str;
-    str.toLowerCase();
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
 
   const active = pokemonsFavorite.includes(pokemon);
 

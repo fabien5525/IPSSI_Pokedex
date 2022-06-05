@@ -81,3 +81,9 @@ export function AppProvider({ children }: Props) {
     </>
   );
 }
+
+export const FirstLetterUpperCase = (str: string) => {
+  if (str.length === 0) return str;
+  str.toLowerCase();
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
