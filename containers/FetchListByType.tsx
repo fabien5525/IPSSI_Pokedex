@@ -1,16 +1,11 @@
 import axios from "axios";
 import { QueryClient, useQuery, QueryClientProvider } from "react-query";
-import { Loader, PokemonItem, Type } from "components";
+import { Loader, PokemonItem, Type, trouverId } from "components";
 import styled from "styled-components";
 
 interface props {
   type: string;
 }
-
-const trouverId = (url: string): number => {
-  const id = url.split("/")[url.split("/").length - 2];
-  return parseInt(id);
-};
 
 const Title = styled.h1`
   span {

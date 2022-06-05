@@ -1,7 +1,8 @@
 import axios from "axios";
 import { QueryClient, useQuery, QueryClientProvider } from "react-query";
-import { Loader, PokemonItem } from "components";
+import { Loader, PokemonItem, trouverId } from "components";
 import { useApp } from "contexts/AppContext";
+import styled from "styled-components";
 
 const FetchListOfPokemons = () => {
   const { setPokemons } = useApp();
@@ -44,12 +45,32 @@ const List = () => {
     setPokemonFilter(e.target.value);
   };
 
+  //Mon StyledInput ne fonctionne pas bien comparé au fonctionnement normal de l'input,
+  //je n'ai donc pas pu l'utilisé et préferé déclaré mon style directement dans l'input
+  // const StyledInput = styled.input`
+  //   padding: 0.5rem;
+  //   border: 1px solid #ccc;
+  //   border-radius: 4px;
+  //   box-sizing: border-box;
+  //   margin-left: 1rem;
+  //   margin-top: 1rem;
+  //   margin-right: 1rem;
+  // `;
+
   return (
     <>
-      <input type="text" onChange={handleChange} value={pokemonFilter} />
+      <input type="text" onChange={handleChange} value={pokemonFilter} placeholder="Search your pokemon here" style={{
+        padding: "0.5rem",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        boxSizing: "border-box",
+        marginLeft: "1rem",
+        marginTop: "1rem",
+        marginRight: "1rem",
+      }}/>
       <ul>
-        {dataFiltered.map((pokemon: any | undefined, index: number) => (
-          <PokemonItem key={`pokelist_${index}`} id={index + 1} {...pokemon} />
+        {dataFiltered.map((pokemon: any | undefined, index : number) => (
+          <PokemonItem key={`pokelist_${index}`} id={trouverId(pokemon.url)} name={pokemon.name} {...pokemon} />
         ))}
       </ul>
     </>

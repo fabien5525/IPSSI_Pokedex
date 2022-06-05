@@ -1,4 +1,4 @@
-import { FirstLetterUpperCase } from "contexts/AppContext";
+import { FirstLetterUpperCase } from "components";
 import { ReactNode } from "react";
 import styled from "styled-components";
 

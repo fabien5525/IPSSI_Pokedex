@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import ReactDOM from "react-dom";
 
 type appContextType = {
   pokemonFilter: string;
@@ -35,8 +36,6 @@ type Props = {
   children: ReactNode;
 };
 
-let init = false;
-
 export function AppProvider({ children }: Props) {
   const router = useRouter();
   const [pokemonFilter, setPokemonFilter] = useState<string>("");
@@ -44,16 +43,23 @@ export function AppProvider({ children }: Props) {
   const [pokemonsFavorite, setPokemonsFavorite] = useState<any[]>([]);
 
   if (typeof window !== "undefined" && pokemonsFavorite.length === 0) {
+    //favorites
     const favorites = localStorage.getItem("pokemonsFavorite") ?? "[]";
     //console.warn("MOUNT", JSON.parse(favorites));
     if (favorites != "") setPokemonsFavorite(JSON.parse(favorites));
     setPokemonsFavorite([...pokemonsFavorite, "define"]);
+
+    //filter from url
+    if (window.location.search !== "") {
+      const search = window.location.search.split("=")[1];
+      setPokemonFilter(search);
+    }
   }
 
   useEffect(() => {
-    if (router.query.search != undefined) {
-      //console.log("test APP CONTEXT", router.query.search);
+    if (router.query != undefined) {
       const { pathname } = router;
+      console.log("test APP CONTEXT", router.query.search);
       if (pokemonFilter === "") {
         router.push(pathname);
       } else {
@@ -81,9 +87,3 @@ export function AppProvider({ children }: Props) {
     </>
   );
 }
-
-export const FirstLetterUpperCase = (str: string) => {
-  if (str.length === 0) return str;
-  str.toLowerCase();
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { QueryClient, useQuery, QueryClientProvider } from "react-query";
-import { Loader, Type, StyledTypes } from "components";
+import { Loader, Type, StyledTypes, FirstLetterUpperCase } from "components";
 import Image from "next/image";
 import styled from "styled-components";
-import { useApp, FirstLetterUpperCase } from "contexts/AppContext";
+import { useApp } from "contexts/AppContext";
 import { useEffect } from "react";
 
 interface props {
@@ -42,8 +42,7 @@ const Pokemon = ({ pokemon }: props) => {
 
   const active = pokemonsFavorite.includes(pokemon);
 
-  const HandleCLickFavUnFav = (ev: any) => {
-    ev.preventDefault();
+  const HandleCLickFavUnFav = () => {
     active
       ? setPokemonsFavorite(
           pokemonsFavorite.filter((pokemon) => pokemon !== pokemon)
@@ -51,47 +50,97 @@ const Pokemon = ({ pokemon }: props) => {
       : setPokemonsFavorite([...pokemonsFavorite, pokemon]);
   };
 
-  const Heart = styled.i`
-    width: 32px;
-    height: 32px;
-    animation: fav;
-    position: relative;
-    animation-fill-mode: forwards;
-    background-color: #d3aaaa;
-    display: inline-block;
+  const HeartCSS = styled.i`
+    & {
+      background-color: gray;
+      display: inline-block;
+      height: 30px;
+      margin: 0 10px;
+      position: relative;
+      top: 0;
+      transform: rotate(-45deg);
+      width: 30px;
+    }
 
-    @keyframes fav {
-      from {
-        background-color: #d3aaaa;
-      }
-      to {
-        background-color: #ff0000;
-      }
+    &:before,
+    &:after {
+      content: "";
+      background-color: gray;
+      border-radius: 50%;
+      height: 30px;
+      position: absolute;
+      width: 30px;
+    }
+
+    &:before {
+      top: -15px;
+      left: 0;
+    }
+
+    &:after {
+      left: 15px;
+      top: 0;
     }
   `;
 
-  const HeartFav = styled.i`
-    width: 32px;
-    height: 32px;
-    animation: unFav;
-    position: relative;
-    animation-fill-mode: forwards;
-    background-color: #ff0000;
-    display: inline-block;
+  const HeartCSSFav = styled.i`
+    & {
+      background-color: red;
+      display: inline-block;
+      height: 30px;
+      margin: 0 10px;
+      position: relative;
+      top: 0;
+      transform: rotate(-45deg);
+      width: 30px;
+    }
 
-    @keyframes unFav {
-      from {
-        background-color: #ff0000;
-      }
-      to {
-        background-color: #d3aaaa;
-      }
+    &:before,
+    &:after {
+      content: "";
+      background-color: red;
+      border-radius: 50%;
+      height: 30px;
+      position: absolute;
+      width: 30px;
+    }
+
+    &:before {
+      top: -15px;
+      left: 0;
+    }
+
+    &:after {
+      left: 15px;
+      top: 0;
+    }
+  `;
+
+  const StyledImage = styled(Image)`
+    min-width: 0 !important;
+    min-height: 0 !important;
+    width: auto !important;
+    height: 50vh !important;
+  `;
+
+  const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    div {
+      margin-top: 1rem;
+    }
+
+    i {
+      margin-top: 2rem;
     }
   `;
 
   return (
     <>
-      <Image
+      <StyledImage
         src={
           data.data.sprites.versions["generation-i"]["red-blue"]
             .front_transparent
@@ -101,36 +150,47 @@ const Pokemon = ({ pokemon }: props) => {
         height="320px"
         loading="eager"
       />
-      <h2>{FirstLetterUpperCase(pokemon)}</h2>
-      <div className="description">
-        <span>Weight: {data.data.weight}</span>{" "}
-        <span>Height: {data.data.height}</span>
-      </div>
-      <StyledTypes className="types">
-        {data.data.types.map((type: any | undefined, index: Number) => (
-          <Type key={`type_${index}`} name={type.type.name}>
-            {FirstLetterUpperCase(type.type.name)}
-          </Type>
-        ))}
-      </StyledTypes>
-      <div>
-        <span>List of Moves</span>
-        <ul>
-          {data.data.moves.map((move: any | undefined, index: Number) => {
-            if (index >= 3) return;
-            return (
-              <li key={`move_${index}`}>
-                {FirstLetterUpperCase(move.move.name)}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      {active ? (
-        <HeartFav onClick={HandleCLickFavUnFav} />
-      ) : (
-        <Heart onClick={HandleCLickFavUnFav} />
-      )}
+
+      <Container>
+        <h2>{FirstLetterUpperCase(pokemon)}</h2>
+        <div className="description">
+          <span>Weight: {data.data.weight}</span>{" "}
+          <span>Height: {data.data.height}</span>
+        </div>
+        <StyledTypes className="types">
+          {data.data.types.map((type: any | undefined, index: Number) => (
+            <Type key={`type_${index}`} name={type.type.name}>
+              {FirstLetterUpperCase(type.type.name)}
+            </Type>
+          ))}
+        </StyledTypes>
+        <div>
+          <span>List of Moves</span>
+          <ul>
+            {data.data.moves.map((move: any | undefined, index: Number) => {
+              if (index >= 3) return;
+              return (
+                <li key={`move_${index}`}>
+                  {FirstLetterUpperCase(move.move.name)}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        {active ? (
+          <HeartCSSFav
+            onClick={() => {
+              HandleCLickFavUnFav();
+            }}
+          />
+        ) : (
+          <HeartCSS
+            onClick={() => {
+              HandleCLickFavUnFav();
+            }}
+          />
+        )}
+      </Container>
     </>
   );
 };
