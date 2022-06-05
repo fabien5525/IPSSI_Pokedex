@@ -44,9 +44,9 @@ export function AppProvider({ children }: Props) {
   if (typeof window !== "undefined" && pokemonsFavorite.length === 0) {
     //favorites
     const favorites = localStorage.getItem("pokemonsFavorite") ?? "";
-    console.warn("MOUNT", JSON.parse(favorites));
+    //console.warn("MOUNT", favorites);
     if (favorites != "") {
-      console.log("fav founds : loading favorites", JSON.parse(favorites))
+      //console.log("fav founds : loading favorites", JSON.parse(favorites))
       setPokemonsFavorite(JSON.parse(favorites));
     }
 
