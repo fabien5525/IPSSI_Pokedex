@@ -195,6 +195,7 @@ const Pokemon = ({ pokemon }: props) => {
   );
 };
 
+//https://github.com/facebook/react/issues/18178#issuecomment-595846312
 const FetchPokemon = (props: props) => {
   const queryClient = new QueryClient();
   return (

@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const { search } = query;
   if (init === false) {
     if (search) {
-      console.log("test FETCHLIST");
+      //console.log("test FETCHLIST");
       if (typeof search === "string") {
         setPokemonFilter(search);
         init = true;

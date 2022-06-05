@@ -6,7 +6,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import ReactDOM from "react-dom";
 
 type appContextType = {
   pokemonFilter: string;
@@ -44,10 +43,12 @@ export function AppProvider({ children }: Props) {
 
   if (typeof window !== "undefined" && pokemonsFavorite.length === 0) {
     //favorites
-    const favorites = localStorage.getItem("pokemonsFavorite") ?? "[]";
-    //console.warn("MOUNT", JSON.parse(favorites));
-    if (favorites != "") setPokemonsFavorite(JSON.parse(favorites));
-    setPokemonsFavorite([...pokemonsFavorite, "define"]);
+    const favorites = localStorage.getItem("pokemonsFavorite") ?? "";
+    console.warn("MOUNT", JSON.parse(favorites));
+    if (favorites != "") {
+      console.log("fav founds : loading favorites", JSON.parse(favorites))
+      setPokemonsFavorite(JSON.parse(favorites));
+    }
 
     //filter from url
     if (window.location.search !== "") {
@@ -57,16 +58,18 @@ export function AppProvider({ children }: Props) {
   }
 
   useEffect(() => {
-    if (router.query != undefined) {
-      const { pathname } = router;
-      console.log("test APP CONTEXT", router.query.search);
-      if (pokemonFilter === "") {
-        router.push(pathname);
-      } else {
-        router.push({
-          pathname,
-          query: { search: pokemonFilter },
-        });
+    if (window && window.location.pathname === "/") {
+      if (router.query != undefined) {
+        const { pathname } = router;
+        //console.log("test APP CONTEXT", router.query.search);
+        if (pokemonFilter === "") {
+          router.push(pathname);
+        } else {
+          router.push({
+            pathname,
+            query: { search: pokemonFilter },
+          });
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

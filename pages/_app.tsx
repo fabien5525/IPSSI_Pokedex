@@ -3,11 +3,12 @@ import type { AppProps } from "next/app";
 import { Nav } from "components";
 import { AppProvider } from "contexts/AppContext";
 import styled, { ThemeProvider } from "styled-components";
+import { ModalProvider } from "contexts/Modal";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height : 94vh;
+  height: 94vh;
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -21,10 +22,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider theme={theme}>
         <AppProvider>
-          <Nav />
-          <Container>
-            <Component {...pageProps}> </Component>
-          </Container>
+        <ModalProvider>
+            <Nav />
+            <Container>
+              <Component {...pageProps}> </Component>
+            </Container>
+          </ModalProvider>
         </AppProvider>
       </ThemeProvider>
     </>

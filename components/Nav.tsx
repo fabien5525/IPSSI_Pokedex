@@ -1,4 +1,5 @@
 //import "./Nav.scss";
+import { useModal } from "contexts/Modal";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -8,7 +9,7 @@ const CustomNav = styled.nav`
   *::after {
     box-sizing: border-box;
   }
-  
+
   & {
     height: 6vh;
     background-color: #282c34;
@@ -29,6 +30,13 @@ const CustomNav = styled.nav`
   }
 `;
 
+const ContactModal = () => {
+  const { openModal } = useModal();
+  return <a style={{
+    cursor: "pointer"
+  }} onClick={() => {openModal()}}>Contact</a>;
+};
+
 const Nav = () => {
   return (
     <CustomNav>
@@ -38,9 +46,7 @@ const Nav = () => {
       <Link href="/type">
         <a>Types</a>
       </Link>
-      <Link href="/contact">
-        <a>Contact</a>
-      </Link>
+      <ContactModal />
     </CustomNav>
   );
 };

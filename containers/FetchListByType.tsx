@@ -27,7 +27,7 @@ const FetchListOfPokemons = ({ type }: props) => {
     data: any;
     error: any;
   } = useQuery("queryClient", () =>
-    axios.get("https://pokeapi.co/api/v2/type/normal")
+    axios.get(`https://pokeapi.co/api/v2/type/${type}`)
   );
 
   if (isLoading) {
@@ -43,11 +43,11 @@ const FetchListOfPokemons = ({ type }: props) => {
         <Type name={type} />
       </Title>
       <ul>
-        {data.data.pokemon.map(({ pokemon }: { pokemon: any }) => {
+        {data.data.pokemon.map(({ pokemon }: { pokemon: any }, index : number) => {
           const id = trouverId(pokemon.url);
           if (id <= 151) {
-            console.log(pokemon);
-            return <PokemonItem name={pokemon.name} id={id} />;
+            //console.log(pokemon);
+            return <PokemonItem key={`list_${index}`} name={pokemon.name} id={id} />;
           }
         })}
       </ul>

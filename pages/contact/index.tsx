@@ -43,53 +43,10 @@ interface Values {
 }
 
 const ContactForm = () => {
+  
   return (
     <StyledMain>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          message: "",
-        }}
-        onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
-        ) => {
-          setTimeout(() => {
-            console.log(values);
-            window.open(`mailto:f.colard@ecole-ipssi.net?subject=PokedexReactJS&body=Name: ${values.name}%0AEmail: ${values.email}%0AMessage: ${values.message}`, '_blank');
-            setSubmitting(false);
-          }, 500);
-        }}
-      >
-        <StyledForm action="mailto:f.colard@ecole-ipssi.net">
-          <StyledRow>
-            <label htmlFor="name">Name</label>
-            <StyledField id="name" name="name" placeholder="John" />
-          </StyledRow>
-          <StyledRow>
-            <label htmlFor="email">Email</label>
-            <StyledField
-              id="email"
-              name="email"
-              placeholder="john@acme.com"
-              type="email"
-            />
-          </StyledRow>
-          <StyledRow>
-            <label htmlFor="message">Message</label>
-            <StyledField
-                id="message"
-                name="message"
-                placeholder="Hello"
-                type="text"
-            />
-          </StyledRow>
-          <StyledRow>
-            <button type="submit">Submit</button>
-          </StyledRow>
-        </StyledForm>
-      </Formik>
+      
     </StyledMain>
   );
 };
