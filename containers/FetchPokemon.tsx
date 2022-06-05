@@ -50,6 +50,7 @@ const Pokemon = ({ pokemon }: props) => {
     //   pokemonsFavorite.filter((pk: string) => pk !== pokemon)
     // );
     if (pokemonsFavorite.includes(pokemon)) {
+      //ne marche pas si le filtre renvoi un tableau vide ???????????????????
       setPokemonsFavorite(
         pokemonsFavorite.filter((pk: string) => pk !== pokemon)
       );

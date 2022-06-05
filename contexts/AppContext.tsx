@@ -39,7 +39,7 @@ export function AppProvider({ children }: Props) {
   const router = useRouter();
   const [pokemonFilter, setPokemonFilter] = useState<string>("");
   const [pokemons, setPokemons] = useState<any[]>([]);
-  const [pokemonsFavorite, setPokemonsFavorite] = useState<any[]>([]);
+  const [pokemonsFavorite, setPokemonsFavorite] = useState<any[]>([""]);
 
   if (typeof window !== "undefined" && pokemonsFavorite.length === 0) {
     //favorites
@@ -48,6 +48,8 @@ export function AppProvider({ children }: Props) {
     if (favorites != "") {
       //console.log("fav founds : loading favorites", JSON.parse(favorites))
       setPokemonsFavorite(JSON.parse(favorites));
+    } else {
+      setPokemonsFavorite([""]);
     }
 
     //filter from url
