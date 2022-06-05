@@ -35,6 +35,9 @@ const Nav = () => {
       <Link href="/">
         <a>Home</a>
       </Link>
+      <Link href="/contact">
+        <a>Contact</a>
+      </Link>
     </CustomNav>
   );
 };

@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { FetchList } from "containers";
 import { useRouter } from "next/router";
 import { useApp } from "contexts/AppContext";
-import { useEffect } from "react";
 
 let init = false;
 

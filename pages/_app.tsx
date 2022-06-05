@@ -2,7 +2,13 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Nav } from "components";
 import { AppProvider } from "contexts/AppContext";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height : 94vh;
+`;
 
 function MyApp({ Component, pageProps }: AppProps) {
   const theme = {
@@ -16,7 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <AppProvider>
           <Nav />
-          <Component {...pageProps}> </Component>
+          <Container>
+            <Component {...pageProps}> </Component>
+          </Container>
         </AppProvider>
       </ThemeProvider>
     </>
