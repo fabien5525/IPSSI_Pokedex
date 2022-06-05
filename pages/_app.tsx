@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider theme={theme}>
         <AppProvider>
-        <ModalProvider>
+          <ModalProvider>
             <Nav />
             <Container>
               <Component {...pageProps}> </Component>

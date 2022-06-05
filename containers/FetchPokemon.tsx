@@ -43,11 +43,25 @@ const Pokemon = ({ pokemon }: props) => {
   const active = pokemonsFavorite.includes(pokemon);
 
   const HandleCLickFavUnFav = () => {
-    active
-      ? setPokemonsFavorite(
-          pokemonsFavorite.filter((pokemon) => pokemon !== pokemon)
-        )
-      : setPokemonsFavorite([...pokemonsFavorite, pokemon]);
+    // console.log(
+    //   "TEST",
+    //   pokemonsFavorite.includes(pokemon),
+    //   pokemonsFavorite,
+    //   pokemonsFavorite.filter((pk: string) => pk !== pokemon)
+    // );
+    if (pokemonsFavorite.includes(pokemon)) {
+      setPokemonsFavorite(
+        pokemonsFavorite.filter((pk: string) => pk !== pokemon)
+      );
+    } else {
+      setPokemonsFavorite([...pokemonsFavorite, pokemon]);
+    }
+
+    // pokemonsFavorite.includes(pokemon)
+    //   ? setPokemonsFavorite(
+    //       pokemonsFavorite.filter((pokemon) => pokemon !== pokemon)
+    //     )
+    //   : setPokemonsFavorite([...pokemonsFavorite, pokemon]);
   };
 
   const HeartCSS = styled.i`
@@ -60,6 +74,7 @@ const Pokemon = ({ pokemon }: props) => {
       top: 0;
       transform: rotate(-45deg);
       width: 30px;
+      cursor: pointer;
     }
 
     &:before,
@@ -93,6 +108,7 @@ const Pokemon = ({ pokemon }: props) => {
       top: 0;
       transform: rotate(-45deg);
       width: 30px;
+      cursor: pointer;
     }
 
     &:before,
